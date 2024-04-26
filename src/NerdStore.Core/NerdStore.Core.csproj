@@ -6,4 +6,9 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+	<ItemGroup>
+		<Using Include="NerdStore.Core.Exceptions"/>
+		<Using Include="System.Text.RegularExpressions"/>
+	</ItemGroup>
+
 </Project>

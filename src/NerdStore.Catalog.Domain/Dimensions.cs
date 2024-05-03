@@ -16,9 +16,9 @@ public class Dimensions
 
     private void Validate(decimal height, decimal width, decimal depth)
     {
-        AssertionConcern.ValidateIfSmallerEqualsMinimum(height, 1, "");
-        AssertionConcern.ValidateIfSmallerEqualsMinimum(width, 1, "");
-        AssertionConcern.ValidateIfSmallerEqualsMinimum(depth, 1, "");
+        AssertionConcern.ValidateIfLessThan(height, 1, "The Height field cannot be less than or equal to 0.");
+        AssertionConcern.ValidateIfLessThan(width, 1, "The Width field cannot be less than or equal to 0.");
+        AssertionConcern.ValidateIfLessThan(depth, 1, "The Depth field cannot be less than or equal to 0.");
     }
 
     public string FormattedDescription() => 

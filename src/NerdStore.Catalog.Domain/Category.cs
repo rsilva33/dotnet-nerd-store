@@ -5,6 +5,11 @@ public class Category : Entity
     public string Name { get; private set; } = string.Empty;
     public int Code { get; private set; }
 
+    // EF Relation
+    public ICollection<Product> Products { get; set; }
+
+    protected Category() { }
+
     public Category(string name, int code)
     {
         Name = name;
@@ -18,8 +23,8 @@ public class Category : Entity
 
     private void Validate()
     {
-        AssertionConcern.ValidateIfEmpty(Name, "");
-        AssertionConcern.ValidateIfEqual(Code, 0,"");
+        AssertionConcern.ValidateIfEmpty(Name, "The Category name field cannot be empty.");
+        AssertionConcern.ValidateIfEqual(Code, 0, "The Code field cannot be 0.");
     }
 
 }

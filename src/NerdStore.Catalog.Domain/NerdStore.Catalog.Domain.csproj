@@ -10,12 +10,4 @@
     <ProjectReference Include="..\NerdStore.Core\NerdStore.Core.csproj" />
   </ItemGroup>
 
-	<ItemGroup>
-		<Using Include="NerdStore.Core.Abstractions"/>
-		<Using Include="NerdStore.Core.DomainObjects"/>
-		<Using Include="NerdStore.Core.Exceptions"/>
-		<Using Include="NerdStore.Core.Validations"/>
-		
-	</ItemGroup>
-
 </Project>

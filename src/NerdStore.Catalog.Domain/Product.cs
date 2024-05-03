@@ -1,4 +1,6 @@
-﻿namespace NerdStore.Catalog.Domain;
+﻿
+
+namespace NerdStore.Catalog.Domain;
 
 public class Product : Entity, IAggreageteRoot
 {
@@ -13,6 +15,8 @@ public class Product : Entity, IAggreageteRoot
 
     public Dimensions Dimensions { get; private set; }
     public Category Category { get; private set; }
+
+    public Product() { }
 
     public Product(string name, string description, bool active, decimal value, string image, DateTime created_at,Guid categoryId, Dimensions dimensions)
     {
@@ -34,7 +38,7 @@ public class Product : Entity, IAggreageteRoot
 
     public void ChangeDescription(string description)
     {
-        AssertionConcern.ValidateIfEmpty(description, "");
+        AssertionConcern.ValidateIfEmpty(description, "The Product Description field cannot be empty.");
         Description = description;
     }
 
@@ -65,8 +69,8 @@ public class Product : Entity, IAggreageteRoot
     {
         AssertionConcern.ValidateIfEmpty(Name, "The Product name field cannot be empty.");
         AssertionConcern.ValidateIfEmpty(Description, "The Product Description field cannot be empty.");
-        AssertionConcern.ValidateIfDifferent(CategoryId, Guid.Empty, "The product CategoryId field cannot be empty.");
-        AssertionConcern.ValidateIfSmallerEqualsMinimum(Value, 0, "The Product Value field cannot be less than 0.");
+        AssertionConcern.ValidateIfEqual(CategoryId, Guid.Empty, "The Product CategoryId field cannot be empty.");
+        AssertionConcern.ValidateIfLessThan(Value, 1, "The Product Value field cannot be less than 0.");
         AssertionConcern.ValidateIfEmpty(Image, "The Product Image field cannot be empty.");
     }
 }

@@ -1,4 +1,6 @@
-﻿namespace NerdStore.Catalog.Data;
+﻿using NerdStore.Core.Abstractions;
+
+namespace NerdStore.Catalog.Data;
 public class CatalogContext : DbContext, IUnitOfWork
 {
     public CatalogContext(DbContextOptions<CatalogContext> options) : base(options) { }

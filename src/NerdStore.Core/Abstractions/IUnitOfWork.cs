@@ -1,4 +1,4 @@
-﻿namespace NerdStore.Core.Abstractions.Data;
+﻿namespace NerdStore.Core.Abstractions;
 public interface IUnitOfWork
 {
     Task<bool> CommitAsync();

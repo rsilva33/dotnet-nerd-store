@@ -1,4 +1,6 @@
-﻿namespace NerdStore.Catalog.Data.Repository;
+﻿using NerdStore.Core.Abstractions;
+
+namespace NerdStore.Catalog.Data.Repository;
 
 internal class ProductRepository : IProductRepository
 {
@@ -23,24 +25,24 @@ internal class ProductRepository : IProductRepository
     public async Task<IEnumerable<Product>> GetByCategory(int code) =>
         await _context.Products.AsNoTracking().Include(p => p.Category).Where(c => c.Category.Code == code).ToListAsync();
 
-    public void AddCategory(Category category) =>
+    public void Add(Category category) =>
         _context.Categories.Add(category);
 
-    public void UpdateCategory(Category category) =>
+    public void Update(Category category) =>
         _context.Categories.Update(category);
 
-    public void DeleteCategory(Category category)
+    public void Delete(Category category)
     {
         throw new NotImplementedException();
     }
 
-    public void AddProduct(Product product) => 
+    public void Add(Product product) => 
         _context.Products.Add(product);
 
-    public void UpdateProduct(Product product) =>
+    public void Update(Product product) =>
         _context.Products.Update(product);
 
-    public void DeleteProduct(Product product)
+    public void Delete(Product product)
     {
         throw new NotImplementedException();
     }

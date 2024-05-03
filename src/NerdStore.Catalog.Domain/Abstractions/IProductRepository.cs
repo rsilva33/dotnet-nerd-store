@@ -8,13 +8,11 @@ public interface IProductRepository : IRepository<Product>
     Task<IEnumerable<Product>> GetByCategory(int code);
     Task<IEnumerable<Category>> GetAllCategories();
 
-    void AddProduct(Product product);
-    void UpdateProduct(Product product);
-    void DeleteProduct(Product product);
+    void Add(Product product);
+    void Update(Product product);
+    void Delete(Product product);
 
-    void AddCategory(Category category);
-    void UpdateCategory(Category category);
-    void DeleteCategory(Category category);
-
-    void Dispose();
+    void Add(Category category);
+    void Update(Category category);
+    void Delete(Category category);
 }

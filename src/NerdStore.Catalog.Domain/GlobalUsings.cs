@@ -3,3 +3,6 @@ global using NerdStore.Core.DomainObjects;
 global using NerdStore.Core.Exceptions;
 global using NerdStore.Core.Validations;
 global using NerdStore.Catalog.Domain.Abstractions;
+
+global using MediatR;
+

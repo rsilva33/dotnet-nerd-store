@@ -16,7 +16,7 @@ public class Product : Entity, IAggreageteRoot
     public Dimensions Dimensions { get; private set; }
     public Category Category { get; private set; }
 
-    public Product() { }
+    protected Product() { }
 
     public Product(string name, string description, bool active, decimal value, string image, DateTime created_at,Guid categoryId, Dimensions dimensions)
     {

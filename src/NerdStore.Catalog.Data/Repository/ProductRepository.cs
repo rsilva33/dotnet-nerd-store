@@ -1,8 +1,6 @@
-﻿using NerdStore.Core.Abstractions;
+﻿namespace NerdStore.Catalog.Data.Repository;
 
-namespace NerdStore.Catalog.Data.Repository;
-
-internal class ProductRepository : IProductRepository
+public class ProductRepository : IProductRepository
 {
     public readonly CatalogContext _context;
 

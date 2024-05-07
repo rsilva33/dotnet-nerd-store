@@ -1,6 +1,5 @@
-﻿using NerdStore.Core.Abstractions.Data;
+﻿namespace NerdStore.Catalog.Domain.Abstractions;
 
-namespace NerdStore.Catalog.Domain.Abstractions;
 public interface IProductRepository : IRepository<Product>
 {
     Task<IEnumerable<Product>> GetAll();

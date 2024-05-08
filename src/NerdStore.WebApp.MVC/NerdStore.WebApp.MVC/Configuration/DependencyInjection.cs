@@ -12,5 +12,7 @@ public static class DependencyInjection
         services.AddScoped<IProductAppService, ProductAppService>();
         services.AddScoped<IStockService, StockService>();
         services.AddScoped<CatalogContext>();
+
+        services.AddScoped<INotificationHandler<ProductBelowStockEvent>, ProductEventHandler>();
     }
 }

@@ -52,7 +52,7 @@ namespace NerdStore.Catalog.Data.Migrations
                     b.Property<Guid>("CategoryId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<DateTime>("Created_At")
+                    b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Description")
@@ -67,7 +67,7 @@ namespace NerdStore.Catalog.Data.Migrations
                         .IsRequired()
                         .HasColumnType("varchar(250)");
 
-                    b.Property<int>("Stock_Quantity")
+                    b.Property<int>("StockQuantity")
                         .HasColumnType("int");
 
                     b.Property<decimal>("Value")

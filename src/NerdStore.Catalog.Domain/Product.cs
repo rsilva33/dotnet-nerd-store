@@ -9,8 +9,8 @@ public class Product : Entity, IAggreageteRoot
     public string Image { get; private set; } = string.Empty;
     public bool Active { get; private set; }
     public decimal Value { get; private set; }
-    public int Stock_Quantity { get; private set; }
-    public DateTime Created_At { get; private set; }
+    public int StockQuantity { get; private set; }
+    public DateTime CreatedAt { get; private set; }
     public Guid CategoryId { get; private set; }
 
     public Dimensions Dimensions { get; private set; }
@@ -25,7 +25,7 @@ public class Product : Entity, IAggreageteRoot
         Active = active;
         Value = value;
         Image = image;
-        Created_At = created_at;
+        CreatedAt = created_at;
         CategoryId = categoryId;
         Dimensions = dimensions;
 
@@ -56,14 +56,14 @@ public class Product : Entity, IAggreageteRoot
         if (HasStock(quantity))
             throw new DomainException("Insufficient stock.");
 
-        Stock_Quantity -= quantity;
+        StockQuantity -= quantity;
     }
 
     public void ReplenishStock(int quantity) =>
-    Stock_Quantity += quantity;
+    StockQuantity += quantity;
 
     public bool HasStock(int quantity) =>
-        Stock_Quantity >= quantity;
+        StockQuantity >= quantity;
 
     public void Validate()
     {

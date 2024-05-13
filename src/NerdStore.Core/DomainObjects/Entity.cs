@@ -43,4 +43,6 @@ public abstract class Entity
     public override string ToString() => 
         GetType().Name + " [Id=" + Id + "]";
     
+    public virtual bool IsValid() =>
+        throw new NotImplementedException();
 }

@@ -26,8 +26,8 @@ public class StockService : IStockService
         product.DebitStock(quantity);
 
         //TODO: Parameterize the stock quantity below
-        if (product.Stock_Quantity < 10)
-            await _bus.PublishEvent(new ProductBelowStockEvent(product.Id, product.Stock_Quantity));
+        if (product.StockQuantity < 10)
+            await _bus.PublishEvent(new ProductBelowStockEvent(product.Id, product.StockQuantity));
 
         _productRepository.Update(product);
 

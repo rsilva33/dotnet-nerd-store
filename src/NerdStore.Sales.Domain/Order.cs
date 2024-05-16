@@ -8,7 +8,7 @@ public class Order : Entity, IAggreageteRoot
     public bool VoucherUsed { get; private set; }
     public decimal Discount { get; private set; }
     public decimal Amount { get; private set; }
-    public DateOnly CreatedAt { get; private set; }
+    public DateTime CreatedAt { get; private set; }
     public OrderStatus OrderStatus { get; private set; }
 
     //NAO POSSO EXPOR A LISTA PARA QUE ELA SEJA MANIPOULADA POR OUTRA.
@@ -17,7 +17,8 @@ public class Order : Entity, IAggreageteRoot
     public IReadOnlyCollection<OrderItem> OrderItems => _ordemItems;
 
     //EF Relational
-    public virtual Voucher Voucher { get; private set; }
+    public Voucher Voucher { get; private set; }
+
 
     protected Order() =>
         _ordemItems = new List<OrderItem>();

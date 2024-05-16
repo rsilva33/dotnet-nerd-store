@@ -22,7 +22,7 @@ public class ViewModelToDomainMappingProfile : Profile
     {
         CreateMap<ProductViewModel, Product>()
             .ConstructUsing(p => 
-            new Product(p.Name, p.Description, p.Active, p.Value, p.Image, p.Created_At, p.CategoryId, 
+            new Product(p.Name, p.Description, p.Active, p.Value, p.Image, p.CreatedAt, p.CategoryId, 
                 new Dimensions(p.Height, p.Width, p.Depth)));
 
         CreateMap<CategoryViewModel, Category>()

@@ -1,6 +1,5 @@
-﻿using NerdStore.Core.Abstractions;
+﻿namespace NerdStore.Catalog.Data;
 
-namespace NerdStore.Catalog.Data;
 public class CatalogContext : DbContext, IUnitOfWork
 {
     public CatalogContext(DbContextOptions<CatalogContext> options) : base(options) { }
@@ -20,13 +19,13 @@ public class CatalogContext : DbContext, IUnitOfWork
 
     public async Task<bool> CommitAsync()
     {
-        foreach (var entry in ChangeTracker.Entries().Where(entry => entry.Entity.GetType().GetProperty("Created_At") != null))
+        foreach (var entry in ChangeTracker.Entries().Where(entry => entry.Entity.GetType().GetProperty("CreatedAt") != null))
         {
             if (entry.State == EntityState.Added)
-                entry.Property("Created_At").CurrentValue = DateTime.Now;
+                entry.Property("CreatedAt").CurrentValue = DateTime.Now;
 
             if (entry.State == EntityState.Modified)
-                entry.Property("Created_At").IsModified = false;
+                entry.Property("CreatedAt").IsModified = false;
         }
 
         return await base.SaveChangesAsync() > 0;

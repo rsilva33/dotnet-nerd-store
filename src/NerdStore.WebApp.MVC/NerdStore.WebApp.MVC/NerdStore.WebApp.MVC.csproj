@@ -11,8 +11,8 @@
     <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="8.0.0" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="8.0.0" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="8.0.0" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="8.0.4" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="8.0.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="8.0.5" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="8.0.5" />
   </ItemGroup>
 
   <ItemGroup>
@@ -20,6 +20,8 @@
     <ProjectReference Include="..\..\NerdStore.Catalog.Data\NerdStore.Catalog.Data.csproj" />
     <ProjectReference Include="..\..\NerdStore.Catalog.Domain\NerdStore.Catalog.Domain.csproj" />
     <ProjectReference Include="..\..\NerdStore.Core\NerdStore.Core.csproj" />
+    <ProjectReference Include="..\..\NerdStore.Sales.Application\NerdStore.Sales.Application.csproj" />
+    <ProjectReference Include="..\..\NerdStore.Sales.Data\NerdStore.Sales.Data.csproj" />
   </ItemGroup>
 
   <ItemGroup>

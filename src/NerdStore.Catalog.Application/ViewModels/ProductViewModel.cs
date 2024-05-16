@@ -24,11 +24,11 @@ public class ProductViewModel
     public decimal Value { get; set; }
 
     [Required(ErrorMessage = "Field {0} is mandatory.")]
-    public DateTime Created_At { get; set; }
+    public DateTime CreatedAt { get; set; }
 
     [Range(1, int.MaxValue, ErrorMessage = "Field {0} must have a minimum value of {1}..")]
     [Required(ErrorMessage = "Field {0} is mandatory.")]
-    public int Stock_Quantity { get; set; }
+    public int StockQuantity { get; set; }
 
     [Range(1, int.MaxValue, ErrorMessage = "Field {0} must have a minimum value of {1}..")]
     [Required(ErrorMessage = "Field {0} is mandatory.")]

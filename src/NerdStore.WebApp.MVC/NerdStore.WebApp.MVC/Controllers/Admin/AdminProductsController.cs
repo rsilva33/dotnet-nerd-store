@@ -40,7 +40,7 @@ public class AdminProductsController : Controller
     public async Task<IActionResult> UpdateProduct(Guid id, ProductViewModel productViewModel)
     {
         var produto = await _productAppService.GetById(id);
-        productViewModel.Stock_Quantity = produto.Stock_Quantity;
+        productViewModel.StockQuantity = produto.StockQuantity;
 
         ModelState.Remove("Stock_Quantity");
 

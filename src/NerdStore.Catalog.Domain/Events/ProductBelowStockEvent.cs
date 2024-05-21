@@ -1,4 +1,6 @@
 ﻿
+using NerdStore.Core.Messages.CommomMessages.DomainEvents;
+
 namespace NerdStore.Catalog.Domain.Events;
 public class ProductBelowStockEvent : DomainEvent
 {

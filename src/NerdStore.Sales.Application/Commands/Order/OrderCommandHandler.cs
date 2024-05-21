@@ -1,4 +1,7 @@
-﻿using NerdStore.Sales.Domain;
+﻿using NerdStore.Core.Abstractions;
+using NerdStore.Core.Messages.CommomMessages.Notifications;
+using NerdStore.Sales.Application.Events;
+using NerdStore.Sales.Domain;
 using NerdStore.Sales.Domain.Abstractions;
 
 namespace NerdStore.Sales.Application.Commands.Order;
@@ -6,10 +9,12 @@ namespace NerdStore.Sales.Application.Commands.Order;
 public class OrderCommandHandler : IRequestHandler<AddItemOrderCommand, bool>
 {
     private readonly IOrderRepository _orderRepository;
-
-    public OrderCommandHandler(IOrderRepository orderRepository)
+    private readonly IMediatorHandler _mediatorHandler;
+        
+    public OrderCommandHandler(IOrderRepository orderRepository, IMediatorHandler mediatorHandler)
     {
         _orderRepository = orderRepository;
+        _mediatorHandler = mediatorHandler;
     }
 
     public async Task<bool> Handle(AddItemOrderCommand message, CancellationToken cancellationToken)
@@ -18,7 +23,7 @@ public class OrderCommandHandler : IRequestHandler<AddItemOrderCommand, bool>
             return false;
 
         var order = await _orderRepository.GetOrderDraftByCustomerId(message.ClientId);
-        var orderItem = new OrderItem(message.ProductId, message.Name, message.Quantity, message.UnitaryValue);
+        var orderItem = new OrderItem(message.ProductId, message.ProductName, message.Quantity, message.UnitaryValue);
 
         if(order is null)
         {
@@ -26,6 +31,7 @@ public class OrderCommandHandler : IRequestHandler<AddItemOrderCommand, bool>
             order.AddItem(orderItem);
 
             _orderRepository.Add(order);
+            order.AddEvent(new DraftOrderStartedEvent(message.ClientId, message.ProductId));
         }
         else
         {
@@ -40,9 +46,12 @@ public class OrderCommandHandler : IRequestHandler<AddItemOrderCommand, bool>
             {
                 _orderRepository.AddItem(orderItem);
             }
+
+            order.AddEvent(new UpdateOrderEvent(order.ClientId, order.Id, order.Amount));
         }
 
-        //order.AdicionarEvento(new PedidoItemAdicionadoEvent(order.ClientId, order.Id, message.ProductId, message.Nome, message.ValorUnitario, message.Quantidade));
+        order.AddEvent(new OrderItemAddedEvent(order.ClientId, order.Id, message.ProductId, message.ProductName, message.UnitaryValue, message.Quantity));
+        
         return await _orderRepository.UnitOfWork.CommitAsync();
     }
 
@@ -53,7 +62,7 @@ public class OrderCommandHandler : IRequestHandler<AddItemOrderCommand, bool>
 
         foreach (var error in message.ValidationResult.Errors)
         {
-            //lanca um evento de erro
+            _mediatorHandler.PublishNotification(new DomainNotification(message.MessageType, error.ErrorMessage));
         }
 
         return false;

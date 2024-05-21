@@ -8,23 +8,22 @@ public class CartController : ControllerBase
     private readonly IMediatorHandler _mediatorHandler;
 
     public CartController(
-                              //INotificationHandler<DomainNotification> notifications,
+                              INotificationHandler<DomainNotification> notifications,
                               IProductAppService productAppService,
                               IMediatorHandler mediatorHandler
                               //IPedidoQueries pedidoQueries
                               ) 
-       //: base(notifications, mediatorHandler)
+       : base(notifications, mediatorHandler)
     {
         _productAppService = productAppService;
         _mediatorHandler = mediatorHandler;
         //_orderQueries = pedidoQueries;
     }
 
-    //[Route("my-cart")]
-    //public async Task<IActionResult> Index()
-    //{
-    //    return View(await _orderQueries.ObterCarrinhoCliente(ClientId));
-    //}
+    public IActionResult Index()
+    {
+        return View(/*await _orderQueries.ObterCarrinhoCliente(ClientId)*/);
+    }
 
     [HttpPost]
     [Route("my-cart")]
@@ -35,20 +34,18 @@ public class CartController : ControllerBase
 
         if (product.StockQuantity < quantity)
         {
-            TempData["Erro"] = "Produto com estoque insuficiente";
-            return RedirectToAction("ProdutoDetalhe", "Vitrine", new { id });
+            TempData["Error"] = "Product out of stock";
+            return RedirectToAction("ProductDetail", "Showcase", new { id });
         }
 
         var command = new AddItemOrderCommand(ClientId, product.Id, product.Name, quantity, product.Value);
         await _mediatorHandler.SendCommand(command);
 
-        //if (ValidatedOperation())
-        //{
-        //    return RedirectToAction("Index");
-        //}
+        if (ValidatedOperation())
+            return RedirectToAction("Index");
 
-        //TempData["Erros"] = ObterMensagensErro();
-        return RedirectToAction("ProdutoDetalhe", "Vitrine", new { id });
+        TempData["Errors"] = GetMessagesError();
+        return RedirectToAction("ProductDetail", "Showcase", new { id });
     }
 
     //[HttpPost]

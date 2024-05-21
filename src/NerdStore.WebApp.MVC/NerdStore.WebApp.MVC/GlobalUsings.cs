@@ -12,8 +12,9 @@ global using NerdStore.Catalog.Domain.Abstractions;
 global using NerdStore.Catalog.Domain.Events;
 global using NerdStore.Catalog.Domain.Services;
 global using NerdStore.Core.Abstractions;
-global using NerdStore.Core.Bus;
-global using NerdStore.WebApp.MVC.Configuration;
+global using NerdStore.Core.Communication.Mediator;
+global using NerdStore.WebApp.MVC.Configurations;
 global using NerdStore.WebApp.MVC.Data;
 global using System.Reflection;
+global using NerdStore.Core.Messages.CommomMessages.Notifications;
 

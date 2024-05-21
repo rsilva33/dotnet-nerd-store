@@ -4,15 +4,15 @@ public class AddItemOrderCommand : Command
 {
     public Guid ClientId { get; private set; }
     public Guid ProductId { get; private set; }
-    public string Name { get; private set; }
+    public string ProductName { get; private set; }
     public int Quantity { get; private set; }
     public decimal UnitaryValue { get; private set; }
 
-    public AddItemOrderCommand(Guid clientId, Guid productId, string name, int quantity, decimal unitaryValue)
+    public AddItemOrderCommand(Guid clientId, Guid productId, string productName, int quantity, decimal unitaryValue)
     {
         ClientId = clientId;
         ProductId = productId;
-        Name = name;
+        ProductName = productName;
         Quantity = quantity;
         UnitaryValue = unitaryValue;
     }
@@ -36,7 +36,7 @@ public class AddItemOrderValidation : AbstractValidator<AddItemOrderCommand>
             .NotEqual(Guid.Empty)
             .WithMessage("Invalid product id.");
 
-        RuleFor(c => c.Name)
+        RuleFor(c => c.ProductName)
             .NotEmpty()
             .WithMessage("The product name was not provided.");
 

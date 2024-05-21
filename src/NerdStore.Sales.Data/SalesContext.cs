@@ -2,16 +2,20 @@
 using Microsoft.EntityFrameworkCore.ChangeTracking;
 using NerdStore.Core.Abstractions;
 using NerdStore.Core.Messages;
+using NerdStore.Sales.Data.Extensions;
 using NerdStore.Sales.Domain;
 
 namespace NerdStore.Sales.Data;
 
 public class SalesContext : DbContext, IUnitOfWork
 {
-    //private readonly IMediatorHandler _mediatorHandler;
+    private readonly IMediatorHandler _mediatorHandler;
 
-
-    public SalesContext(DbContextOptions<SalesContext> options) : base(options) { }
+    public SalesContext(DbContextOptions<SalesContext> options, IMediatorHandler mediatorHandler)
+        : base(options)
+    {
+        _mediatorHandler = mediatorHandler;
+    }
 
     public DbSet<Order> Orders { get; set; }
     public DbSet<OrderItem> OrderItems { get; set; }
@@ -34,7 +38,9 @@ public class SalesContext : DbContext, IUnitOfWork
         }
 
         var success = await base.SaveChangesAsync() > 0;
-        //if (sucesso) await _mediatorHandler.PublicarEventos(this);
+
+        if (success) 
+            await _mediatorHandler.PublishEvents(this);
 
         return success;
     }

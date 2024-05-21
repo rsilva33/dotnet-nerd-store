@@ -1,4 +1,6 @@
-﻿namespace NerdStore.Core.Bus;
+﻿using NerdStore.Core.Messages.CommomMessages.Notifications;
+
+namespace NerdStore.Core.Communication.Mediator;
 
 public class MediatorHandler : IMediatorHandler
 {
@@ -16,4 +18,7 @@ public class MediatorHandler : IMediatorHandler
     //Send => request 
     public async Task<bool> SendCommand<T>(T command) where T : Command => 
         await _mediator.Send(command);
+
+    public async Task PublishNotification<T>(T notification) where T : DomainNotification =>
+        await _mediator.Publish(notification);
 }

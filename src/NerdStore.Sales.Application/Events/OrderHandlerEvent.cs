@@ -1,7 +1,7 @@
 ﻿
 namespace NerdStore.Sales.Application.Events;
 
-public class OrderEventHandler :
+public class OrderHandlerEvent :
     INotificationHandler<DraftOrderStartedEvent>,
     INotificationHandler<OrderItemAddedEvent>,
     INotificationHandler<UpdateOrderEvent>

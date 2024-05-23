@@ -1,6 +1,7 @@
 ﻿using NerdStore.Core.Messages.CommomMessages.Notifications;
 using NerdStore.Sales.Application.Commands.Order;
 using NerdStore.Sales.Application.Events;
+using NerdStore.Sales.Application.Queries.Order;
 using NerdStore.Sales.Data;
 using NerdStore.Sales.Data.Repository;
 using NerdStore.Sales.Domain.Abstractions;
@@ -25,11 +26,12 @@ public static class DependencyInjection
         //Sales
         services.AddScoped<SalesContext>();
         services.AddScoped<IOrderRepository, OrderRepository>();
+        services.AddScoped<IOrderQueries, OrderQueries>();
         services.AddScoped<IRequestHandler<AddItemOrderCommand, bool>, OrderCommandHandler>();
 
-        services.AddScoped<INotificationHandler<OrderItemAddedEvent>, OrderEventHandler>();
-        services.AddScoped<INotificationHandler<DraftOrderStartedEvent>, OrderEventHandler>();
-        services.AddScoped<INotificationHandler<UpdateOrderEvent>, OrderEventHandler>();
+        services.AddScoped<INotificationHandler<OrderItemAddedEvent>, OrderHandlerEvent>();
+        services.AddScoped<INotificationHandler<DraftOrderStartedEvent>, OrderHandlerEvent>();
+        services.AddScoped<INotificationHandler<UpdateOrderEvent>, OrderHandlerEvent>();
 
 
 
